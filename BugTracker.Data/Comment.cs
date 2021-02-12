@@ -15,6 +15,10 @@ namespace BugTracker.Data
         [Required]
         public string Title { get; set; }
         public int CommentId { get; set; }
+        public Guid OwnerId { get; set; }
+
+        public string Content { get; set; }
+
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }
         public DateTimeOffset ModifiedUtc { get; set; }
