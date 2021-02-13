@@ -58,6 +58,14 @@
     <Compile Include="BuildErrorDetail.cs" />
     <Compile Include="BuildErrorEdit.cs" />
     <Compile Include="BuildErrorListItem.cs" />
+    <Compile Include="ErrorCreate.cs" />
+    <Compile Include="ErrorDetail.cs" />
+    <Compile Include="ErrorEdit.cs" />
+    <Compile Include="ErrorListItem.cs" />
+    <Compile Include="ProjectCreate.cs" />
+    <Compile Include="ProjectDetail.cs" />
+    <Compile Include="ProjectEdit.cs" />
+    <Compile Include="ProjectListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
