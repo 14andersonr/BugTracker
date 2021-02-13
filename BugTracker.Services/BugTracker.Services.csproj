@@ -54,11 +54,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentService.cs" />
+    <Compile Include="BuildErrorService.cs" />
+    <Compile Include="ErrorService.cs" />
+    <Compile Include="ProjectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BugTracker.Data\BugTracker.Data.csproj">
+      <Project>{01f30ca1-467d-4359-8623-499014042a10}</Project>
+      <Name>BugTracker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BugTracker.Models\BugTracker.Models.csproj">
+      <Project>{3ca813d8-375a-4a5e-9da7-b66dd374bdcf}</Project>
+      <Name>BugTracker.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
