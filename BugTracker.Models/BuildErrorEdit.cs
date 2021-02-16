@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BugTracker.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Models
 {
-    class BuildErrorEdit : Error
+    public class BuildErrorEdit : Error
     {
-        public int ErrorId { get; set; }
-        public bool Resolved { get; set; }
-        public string Title { get; set; }
+        public new int ErrorId { get; set; }
+        public new bool Resolved { get; set; }
+        public new string Title { get; set; }
         public string BuildErrorMessage { get; set; }
         public int LineNumber { get; set; }
     }
