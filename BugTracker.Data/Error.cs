@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Data
 {
-    class Error
+    public class Error
     {
         [Key]
         public int ErrorId { get; set; }
 
         [ForeignKey(nameof(Project))] //ForeignKey has a nameof and a public virtual.
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
 
         public virtual Project Project { get; set; }
 
