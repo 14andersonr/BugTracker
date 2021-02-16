@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Data
 {
-    class Project
+    public class Project
     {
         [Key]
         public int ProjectId { get; set; }
