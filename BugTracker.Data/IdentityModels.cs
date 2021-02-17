@@ -33,6 +33,8 @@ namespace BugTracker.Data
             return new ApplicationDbContext();
         }
 
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Error> Errors { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<BuildError> BuildErrors { get; set; }
 
