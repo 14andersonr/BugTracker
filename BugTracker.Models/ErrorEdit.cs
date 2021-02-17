@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Models
 {
-    class ErrorEdit
+    public class ErrorEdit
     {
+        public int ErrorId { get; set; }
+        public string Title { get; set; }
+        public bool Resolved { get; set; }
     }
 }
