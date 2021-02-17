@@ -96,6 +96,10 @@
     <Compile Include="Migrations\202102162019531_AddedProjectIdnull.Designer.cs">
       <DependentUpon>202102162019531_AddedProjectIdnull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102170050267_ErrorsandProjects.cs" />
+    <Compile Include="Migrations\202102170050267_ErrorsandProjects.Designer.cs">
+      <DependentUpon>202102170050267_ErrorsandProjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102162019531_AddedProjectIdnull.resx">
       <DependentUpon>202102162019531_AddedProjectIdnull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102170050267_ErrorsandProjects.resx">
+      <DependentUpon>202102170050267_ErrorsandProjects.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
