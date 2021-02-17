@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Models
 {
-    class ProjectDetail
+    public class ProjectDetail
     {
         public int ProjectId { get; set; }
         public string Title { get; set; }
