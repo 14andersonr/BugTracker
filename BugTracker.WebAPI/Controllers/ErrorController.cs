@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BugTracker.Models;
+using BugTracker.Services;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,7 +10,59 @@ using System.Web.Http;
 
 namespace BugTracker.WebAPI.Controllers
 {
+    [Authorize]
     public class ErrorController : ApiController
     {
+        private ErrorService CreateErrorService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var errorService = new ErrorService(userId);
+            return errorService;
+        }
+        public IHttpActionResult Get()
+        {
+            ErrorService errorService = CreateErrorService();
+            var errors = errorService.GetErrors();
+            return Ok(errors);
+        }
+        public IHttpActionResult Post(ErrorCreate error)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateErrorService();
+
+            if (!service.CreateError(error))
+                return InternalServerError();
+
+            return Ok();
+        }
+        public IHttpActionResult Get(int id)
+        {
+            ErrorService errorService = CreateErrorService();
+            var error = errorService.GetErrorById(id);
+            return Ok(error);
+        }
+        public IHttpActionResult Put(ErrorEdit error)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateErrorService();
+
+            if (!service.UpdateError(error))
+                return InternalServerError();
+
+            return Ok();
+        }
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateErrorService();
+
+            if (!service.DeleteError(id))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
 }
