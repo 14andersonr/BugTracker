@@ -17,23 +17,23 @@ namespace BugTracker.Services
             _userId = userId;
         }
 
-        public bool CreateComment(CommentCreate model)
+        public bool CreateComment(Comment model)
         {
             var entity =
                 new Comment()
                 {
-                    OwnerId = _userId,
-                    
                     Text = model.Text,
-                    CreatedUtc = DateTimeOffset.Now,
+                    CommentId = model.CommentId,
+                    OwnerId = _userId,
                 };
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Comments.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-
+           
         public IEnumerable<CommentListItem> GetComments()
         {
             using (var ctx = new ApplicationDbContext())
@@ -45,9 +45,9 @@ namespace BugTracker.Services
                     .Select(
                         e => new CommentListItem
                         {
-                            CommentId = e.CommentId,
+                            
                             Text = e.Text,
-                            CreatedUtc = e.CreatedUtc,
+                            CommentId = e.CommentId,
                         }
                         );
 
@@ -68,7 +68,6 @@ namespace BugTracker.Services
                     {
                         CommentId = entity.CommentId,
                         Text = entity.Text,
-                        CreatedUtc = entity.CreatedUtc,
                     };
              }
         }
