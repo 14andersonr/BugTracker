@@ -24,6 +24,8 @@ namespace BugTracker.Services
                 {
                     Text = model.Text,
                     CommentId = model.CommentId,
+                    Content = model.Content,
+                    CreatedUtc = DateTimeOffset.Now,
                     OwnerId = _userId,
                 };
 
@@ -48,6 +50,7 @@ namespace BugTracker.Services
                             
                             Text = e.Text,
                             CommentId = e.CommentId,
+                            CreatedUtc = e.CreatedUtc,
                         }
                         );
 
@@ -68,6 +71,7 @@ namespace BugTracker.Services
                     {
                         CommentId = entity.CommentId,
                         Text = entity.Text,
+                        CreatedUtc = entity.CreatedUtc,
                     };
              }
         }
