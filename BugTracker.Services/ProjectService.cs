@@ -85,7 +85,7 @@ namespace BugTracker.Services
 
                 entity.Title = model.Title;
                 entity.Description = model.Description;
-                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                entity.ModifiedUtc = DateTimeOffset.Now;
 
                 return ctx.SaveChanges() == 1;
             }
