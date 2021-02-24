@@ -17,5 +17,6 @@ namespace BugTracker.Models
         public int? ErrorId { get; set; }
 
         public virtual CommentListItem Error { get; set; }
+        public string Content { get; set; }
     }
 }
