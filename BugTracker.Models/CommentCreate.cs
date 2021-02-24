@@ -13,10 +13,8 @@ namespace BugTracker.Models
     {
         [Required]
         public string Text { get; set; }
-        //[ForeignKey(nameof(Error))]
+        public string Content { get; set; }
+         public int? ErrorId { get; set; }
 
-        // public int? ErroId { get; set; }
-
-        //public virtual Error Error { get; set; }
     }
 }
