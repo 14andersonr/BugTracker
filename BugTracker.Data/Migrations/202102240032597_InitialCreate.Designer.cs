@@ -13,7 +13,7 @@ namespace BugTracker.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202102161948175_InitialCreate"; }
+            get { return "202102240032597_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

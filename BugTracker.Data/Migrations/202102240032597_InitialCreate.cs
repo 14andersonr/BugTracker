@@ -8,21 +8,22 @@ namespace BugTracker.Data.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.BuildError",
+                "dbo.Error",
                 c => new
                     {
                         ErrorId = c.Int(nullable: false, identity: true),
-                        LineNumber = c.Int(nullable: false),
-                        BuildErrorMessage = c.String(nullable: false),
-                        ProjectId = c.Int(nullable: false),
+                        ProjectId = c.Int(),
                         OwnerId = c.Guid(nullable: false),
                         Title = c.String(nullable: false),
                         Resolved = c.Boolean(nullable: false),
                         CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
                         ModifiedUtc = c.DateTimeOffset(precision: 7),
+                        LineNumber = c.Int(),
+                        BuildErrorMessage = c.String(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.ErrorId)
-                .ForeignKey("dbo.Project", t => t.ProjectId, cascadeDelete: true)
+                .ForeignKey("dbo.Project", t => t.ProjectId)
                 .Index(t => t.ProjectId);
             
             CreateTable(
@@ -43,14 +44,15 @@ namespace BugTracker.Data.Migrations
                 c => new
                     {
                         Text = c.String(nullable: false, maxLength: 128),
-                        Title = c.String(nullable: false),
                         CommentId = c.Int(nullable: false),
                         OwnerId = c.Guid(nullable: false),
-                        Content = c.String(),
+                        Content = c.String(nullable: false),
                         CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
-                        ModifiedUtc = c.DateTimeOffset(nullable: false, precision: 7),
+                        ErrorId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Text);
+                .PrimaryKey(t => t.Text)
+                .ForeignKey("dbo.Error", t => t.ErrorId, cascadeDelete: true)
+                .Index(t => t.ErrorId);
             
             CreateTable(
                 "dbo.IdentityRole",
@@ -130,12 +132,14 @@ namespace BugTracker.Data.Migrations
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
-            DropForeignKey("dbo.BuildError", "ProjectId", "dbo.Project");
+            DropForeignKey("dbo.Comment", "ErrorId", "dbo.Error");
+            DropForeignKey("dbo.Error", "ProjectId", "dbo.Project");
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
-            DropIndex("dbo.BuildError", new[] { "ProjectId" });
+            DropIndex("dbo.Comment", new[] { "ErrorId" });
+            DropIndex("dbo.Error", new[] { "ProjectId" });
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
@@ -143,7 +147,7 @@ namespace BugTracker.Data.Migrations
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Comment");
             DropTable("dbo.Project");
-            DropTable("dbo.BuildError");
+            DropTable("dbo.Error");
         }
     }
 }

@@ -14,5 +14,7 @@ namespace BugTracker.Models
 
         [Display(Name = "Created")]
         public DateTimeOffset? CreatedUtc { get; set; }
+        public int? ErrorId { get; set; }
+        public string Content { get; set;  }
     }
 }

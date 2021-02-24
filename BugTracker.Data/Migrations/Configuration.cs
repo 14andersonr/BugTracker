@@ -9,7 +9,7 @@ namespace BugTracker.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "BugTracker.Data.ApplicationDbContext";
         }
 

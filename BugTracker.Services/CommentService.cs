@@ -17,23 +17,26 @@ namespace BugTracker.Services
             _userId = userId;
         }
 
-        public bool CreateComment(CommentCreate model)
+        public bool CreateComment(Comment model)
         {
             var entity =
                 new Comment()
                 {
-                    OwnerId = _userId,
-                    
                     Text = model.Text,
+                    CommentId = model.CommentId,
+                    Content = model.Content,
+                    OwnerId = _userId,
                     CreatedUtc = DateTimeOffset.Now,
+                    ErrorId = model.ErrorId
                 };
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Comments.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
-
+           
         public IEnumerable<CommentListItem> GetComments()
         {
             using (var ctx = new ApplicationDbContext())
@@ -45,9 +48,12 @@ namespace BugTracker.Services
                     .Select(
                         e => new CommentListItem
                         {
-                            CommentId = e.CommentId,
+                            
                             Text = e.Text,
-                            CreatedUtc = e.CreatedUtc,
+                            CommentId = e.CommentId,
+                            ErrorId = e.ErrorId,
+                            Content = e.Content,
+                            CreatedUtc = e.CreatedUtc
                         }
                         );
 
@@ -68,7 +74,8 @@ namespace BugTracker.Services
                     {
                         CommentId = entity.CommentId,
                         Text = entity.Text,
-                        CreatedUtc = entity.CreatedUtc,
+                        ErrorId = entity.ErrorId,
+                        CreatedUtc = entity.CreatedUtc
                     };
              }
         }
@@ -83,7 +90,9 @@ namespace BugTracker.Services
                     .Single(e => e.CommentId == model.CommentId && e.OwnerId == _userId);
 
                 entity.Text = model.Text;
-
+                entity.Content = model.content;
+                //entity.ErrorId = model.ErrorId;
+               
                 return ctx.SaveChanges() == 1;
    
             }

@@ -1,4 +1,5 @@
-﻿using BugTracker.Models;
+﻿using BugTracker.Data;
+using BugTracker.Models;
 using BugTracker.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -20,26 +21,27 @@ namespace BugTracker.WebAPI.Controllers
 
         }
 
-        public IHttpActionResult Post (CommentCreate comment)
+        public IHttpActionResult Post(Comment comment)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var service = CreateCommentService();
-
             if (!service.CreateComment(comment))
                 return InternalServerError();
             return Ok();
         }
+
 
         private CommentService CreateCommentService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var commentService = new CommentService(userId);
             return commentService;
-
         }
-public IHttpActionResult Get (int id)
+
+
+        public IHttpActionResult Get (int id)
         {
             CommentService commentService = CreateCommentService();
             var comment = commentService.GetCommentById(id);

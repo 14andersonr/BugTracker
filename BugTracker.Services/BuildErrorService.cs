@@ -26,6 +26,8 @@ namespace BugTracker.Services
                     Title = model.Title,
                     LineNumber = model.LineNumber,
                     BuildErrorMessage = model.BuildErrorMessage,
+                    ProjectId = model.ProjectId,
+                    Resolved = model.Resolved,
                     CreatedUtc = DateTimeOffset.Now
                 };
 
@@ -50,6 +52,7 @@ namespace BugTracker.Services
                         {
                             ErrorId = e.ErrorId,
                             Title = e.Title,
+                            Resolved = e.Resolved,
                             CreatedUtc = e.CreatedUtc
                         }
                         );
@@ -68,9 +71,11 @@ namespace BugTracker.Services
                 return
                     new BuildErrorDetail
                     {
+                        Title = entity.Title,
                         ErrorId = entity.ErrorId,
                         LineNumber = entity.LineNumber,
                         BuildErrorMessage = entity.BuildErrorMessage,
+                        Resolved = entity.Resolved,
                         CreatedUtc = entity.CreatedUtc,
                         ModifiedUtc = entity.ModifiedUtc 
                     };
@@ -87,6 +92,8 @@ namespace BugTracker.Services
                     .Single(e => e.ErrorId == model.ErrorId && e.OwnerId == _userId);
                 entity.Title = model.Title;
                 entity.Resolved = model.Resolved;
+                entity.LineNumber = model.LineNumber;
+                entity.BuildErrorMessage = model.BuildErrorMessage;
                 entity.ModifiedUtc = DateTimeOffset.Now;
 
                 return ctx.SaveChanges() == 1;
