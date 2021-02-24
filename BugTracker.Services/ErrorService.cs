@@ -48,6 +48,7 @@ namespace BugTracker.Services
                                 {
                                     ErrorId = e.ErrorId,
                                     Title = e.Title,
+                                    Resolved = e.Resolved,
                                     CreatedUtc = e.CreatedUtc
                                 }
                         );
@@ -86,7 +87,7 @@ namespace BugTracker.Services
 
                 entity.Title = model.Title;
                 entity.Resolved = model.Resolved;
-                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                entity.ModifiedUtc = DateTimeOffset.Now;
 
                 return ctx.SaveChanges() == 1;
             }

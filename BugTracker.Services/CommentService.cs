@@ -52,8 +52,8 @@ namespace BugTracker.Services
                             Text = e.Text,
                             CommentId = e.CommentId,
                             ErrorId = e.ErrorId,
-                            Content = e.Content
-                            
+                            Content = e.Content,
+                            CreatedUtc = e.CreatedUtc
                         }
                         );
 
@@ -74,7 +74,8 @@ namespace BugTracker.Services
                     {
                         CommentId = entity.CommentId,
                         Text = entity.Text,
-                        ErrorId = entity.ErrorId
+                        ErrorId = entity.ErrorId,
+                        CreatedUtc = entity.CreatedUtc
                     };
              }
         }
