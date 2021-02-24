@@ -25,8 +25,9 @@ namespace BugTracker.Services
                     Text = model.Text,
                     CommentId = model.CommentId,
                     Content = model.Content,
-                    CreatedUtc = DateTimeOffset.Now,
                     OwnerId = _userId,
+                    CreatedUtc = DateTimeOffset.Now,
+                    ErrorId = model.ErrorId
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -50,7 +51,9 @@ namespace BugTracker.Services
                             
                             Text = e.Text,
                             CommentId = e.CommentId,
-                            CreatedUtc = e.CreatedUtc,
+                            ErrorId = e.ErrorId,
+                            Content = e.Content,
+                            CreatedUtc = e.CreatedUtc
                         }
                         );
 
@@ -71,7 +74,8 @@ namespace BugTracker.Services
                     {
                         CommentId = entity.CommentId,
                         Text = entity.Text,
-                        CreatedUtc = entity.CreatedUtc,
+                        ErrorId = entity.ErrorId,
+                        CreatedUtc = entity.CreatedUtc
                     };
              }
         }
@@ -86,7 +90,9 @@ namespace BugTracker.Services
                     .Single(e => e.CommentId == model.CommentId && e.OwnerId == _userId);
 
                 entity.Text = model.Text;
-
+                entity.Content = model.content;
+                //entity.ErrorId = model.ErrorId;
+               
                 return ctx.SaveChanges() == 1;
    
             }

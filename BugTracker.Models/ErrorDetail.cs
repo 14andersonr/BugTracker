@@ -9,7 +9,7 @@ namespace BugTracker.Models
 {
     public class ErrorDetail
     {
-        public int ErrorId { get; set; }
+        
         public string Title { get; set; }
         public bool Resolved { get; set; }
 
@@ -18,5 +18,9 @@ namespace BugTracker.Models
 
         [Display(Name = "Modified")]
         public DateTimeOffset? ModifiedUtc { get; set; }
+        public int? ErrorId { get; set; }
+        public virtual ErrorListItem Error { get; set; }
+
+
     }
 }

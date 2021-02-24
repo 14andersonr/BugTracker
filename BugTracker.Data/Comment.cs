@@ -16,15 +16,15 @@ namespace BugTracker.Data
         [Required]
         public int CommentId { get; set; }
         public Guid OwnerId { get; set; }
-
+        [Required]
         public string Content { get; set; }
        
         public DateTimeOffset CreatedUtc { get; set; }
         
-        ////[ForeignKey(nameof(Error))]
+        [ForeignKey(nameof(Error))]
 
-        //public int? ErrorId {get; set;}
+        public int? ErrorId {get; set;}
 
-        //public virtual Error Error {get; set;}
+        public virtual Error Error {get; set;}
     }
 }
