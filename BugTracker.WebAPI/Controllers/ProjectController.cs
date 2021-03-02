@@ -28,20 +28,20 @@ namespace BugTracker.WebAPI.Controllers
         public IHttpActionResult Post(ProjectCreate project)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest($"Your ModelState is invalid and set to {ModelState}");
 
             var service = CreateProjectService();
 
             if (!service.CreateProject(project))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You've created a project!");
         }
         public IHttpActionResult Get(int id)
         {
             ProjectService projectService = CreateProjectService();
             var project = projectService.GetProjectById(id);
-            return Ok(project);
+            return Ok($"Here is the project you requested: {project}");
         }
         public IHttpActionResult Put(ProjectEdit project)
         {
@@ -53,7 +53,7 @@ namespace BugTracker.WebAPI.Controllers
             if (!service.UpdateProject(project))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You've successfully updated the project!");
         }
         public IHttpActionResult Delete(int id)
         {
@@ -62,7 +62,7 @@ namespace BugTracker.WebAPI.Controllers
             if (!service.DeleteProject(id))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You've successfully deleted the project!");
         }
     }
 }
