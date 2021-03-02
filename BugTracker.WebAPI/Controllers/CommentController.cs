@@ -24,12 +24,12 @@ namespace BugTracker.WebAPI.Controllers
         public IHttpActionResult Post(Comment comment)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest($"Your ModelState is invalid and set to {ModelState}");
 
             var service = CreateCommentService();
             if (!service.CreateComment(comment))
                 return InternalServerError();
-            return Ok();
+            return Ok("You posted a comment!");
         }
 
 
@@ -45,7 +45,7 @@ namespace BugTracker.WebAPI.Controllers
         {
             CommentService commentService = CreateCommentService();
             var comment = commentService.GetCommentById(id);
-            return Ok(comment);
+            return Ok($"Here is the requested comment: {comment}");
         }
 
         public IHttpActionResult Put(CommentEdit comment)
@@ -58,7 +58,7 @@ namespace BugTracker.WebAPI.Controllers
             if (!service.UpdateComment(comment))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You updated the comment!");
         }
 
         public IHttpActionResult Delete (int id)
@@ -67,7 +67,7 @@ namespace BugTracker.WebAPI.Controllers
 
             if (!service.DeleteComment(id))
                 return InternalServerError();
-            return Ok();
+            return Ok("You deleted the comment!");
         }
     }
 }

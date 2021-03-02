@@ -28,20 +28,20 @@ namespace BugTracker.WebAPI.Controllers
         public IHttpActionResult Post(ErrorCreate error)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest($"Your ModelState is invalid and set to {ModelState}");
 
             var service = CreateErrorService();
 
             if (!service.CreateError(error))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("Your error has been posted.");
         }
         public IHttpActionResult Get(int id)
         {
             ErrorService errorService = CreateErrorService();
             var error = errorService.GetErrorById(id);
-            return Ok(error);
+            return Ok($"Here is the error you requested: {error}");
         }
         public IHttpActionResult Put(ErrorEdit error)
         {
@@ -53,7 +53,7 @@ namespace BugTracker.WebAPI.Controllers
             if (!service.UpdateError(error))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You've sucessfully updated the error.");
         }
         public IHttpActionResult Delete(int id)
         {
@@ -62,7 +62,7 @@ namespace BugTracker.WebAPI.Controllers
             if (!service.DeleteError(id))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You deleted the error! Nice work!");
         }
     }
 }
