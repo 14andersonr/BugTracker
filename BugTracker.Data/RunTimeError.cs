@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Data
 {
-    public class BuildError : Error
+    public class RunTimeError : Error
     {
         [Required]
-        public string BuildErrorMessage { get; set; }          
+        public string RunTimeMessage { get; set; }
     }
 }

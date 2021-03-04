@@ -24,6 +24,7 @@ namespace BugTracker.Data
         [Required]
         public string Title { get; set; }
 
+
         [Required]
         public bool Resolved { get; set; }
 
@@ -31,5 +32,7 @@ namespace BugTracker.Data
         public DateTimeOffset CreatedUtc { get; set; }
 
         public DateTimeOffset? ModifiedUtc { get; set; }
+
+        public int LineNumber { get; set; }
     }
 }
