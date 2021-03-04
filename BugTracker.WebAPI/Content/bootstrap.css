@@ -6831,4 +6831,9 @@ button.close {
     display: none !important;
   }
 }
+
+.col-md-4 {
+    border-width: 200px;
+    margin-top: auto;
+}
 /*# sourceMappingURL=bootstrap.css.map */
