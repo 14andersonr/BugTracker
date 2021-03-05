@@ -90,11 +90,19 @@
     <Compile Include="ErrorDetail.cs" />
     <Compile Include="ErrorEdit.cs" />
     <Compile Include="ErrorListItem.cs" />
+    <Compile Include="GitFileErrorCreate.cs" />
+    <Compile Include="GitFileErrorDetail.cs" />
+    <Compile Include="GitFileErrorEdit.cs" />
+    <Compile Include="GitFileErrorListItem.cs" />
     <Compile Include="ProjectCreate.cs" />
     <Compile Include="ProjectDetail.cs" />
     <Compile Include="ProjectEdit.cs" />
     <Compile Include="ProjectListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunTimeErrorCreate.cs" />
+    <Compile Include="RunTimeErrorDetail.cs" />
+    <Compile Include="RunTimeErrorEdit.cs" />
+    <Compile Include="RunTimeErrorListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Data
 {
-    public class BuildError : Error
+    public class GitFileError : Error
     {
         [Required]
-        public string BuildErrorMessage { get; set; }          
+        public string GitFileMessage { get; set; }
     }
 }
