@@ -42,19 +42,21 @@
                 <div class="col-1">
                     <div class="form-box">
                         <div class="form">
-                            <form class="login-form">
+                            <form class="login-form" method="post" action="https://localhost:44336/token" enctype="application/x-www-form-urlencoded">
                                 <center><h1 class="main-heading">Login Form</h1></center>
-                                <input type="text" placeholder="user name" />
-                                <input type="password" placeholder="password" />
+                                <input type="hidden" name="grant_type" value="password" />
+                                <input type="text" name="username" placeholder="user name" />
+                                <input type="password" name="password" placeholder="password" />
                                 <button>LOGIN</button>
                                 <p class="message">Not Registered? <a href="#">Register</a></p>
                             </form>
-                            <form class="register-form">
+                            <form class="register-form" method="post" action="https://localhost:44336/api/Account/Register" enctype="application/x-www-form-urlencoded">
                                 <center><h1 class="main-heading">Register Form</h1></center>
-                                <input type="text" placeholder="user name" />
-                                <input type="text" placeholder="email" />
-                                <input type="password" placeholder="password" />
-                                <button>REGISTER</button>
+                                <input type="text" name="username" placeholder="user name" />
+                                <input type="text" name="email" placeholder="email" />
+                                <input type="password" name="password" placeholder="password" />
+                                <input type="password" name="ConfirmPassword" placeholder="Confirm Password"/>
+                                <button type="submit">REGISTER</button>
                                 <p class="message">
                                     Already Registered?<a href="#">Login</a>
                                 </p>
