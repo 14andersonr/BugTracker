@@ -1,8 +1,4 @@
-﻿.col-1 {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+﻿
 
 .full-page {
     height: 100vh;
@@ -75,7 +71,7 @@ nav {
                     color: saddlebrown;
                 }
 
-.raw {
+.row {
     display: flex;
     align-items:stretch;
     margin: 100px;
@@ -98,7 +94,7 @@ nav {
 }
 
 .main-heading {
-    color: orangered;
+    color: wheat;
     padding-bottom: 20px;
 }
 
@@ -138,7 +134,7 @@ nav {
     }
 
         .form .message a {
-            color: orangered;
+            color: wheat;
             text-decoration: none;
         }
 
@@ -153,3 +149,50 @@ nav {
     font-family: 'Kaushan Script', cursive;
     padding-left: 60px;
 }
+
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+[data-tab-content] {
+    display: none;
+}
+
+.active[data-tab-content] {
+    display: block;
+}
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px;
+}
+
+    .tab.active {
+        background-color: #CCC;
+    }
+
+    .tab:hover {
+        background-color: wheat;
+    }
+
+.tab-content {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
