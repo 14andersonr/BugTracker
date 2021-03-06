@@ -26,5 +26,12 @@ namespace BugTracker.Data
         public DateTimeOffset CreatedUtc { get; set; }
 
         public DateTimeOffset? ModifiedUtc { get; set; }
+
+        public Project() { }
+        public Project(string title, string description)
+        {
+            Title = title;
+            Description = description;
+        }
     }
 }
