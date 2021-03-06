@@ -61,17 +61,172 @@ namespace BugTrackerUI
 
         private void ProjectsMenu()
         {
-            Console.WriteLine("You've reached the Projects menu");
-        }
+            bool userMenuLoop = true;
+            while (userMenuLoop)
+            {
+                Console.WriteLine("You've reached the Projects menu");
+
+                // Display our options to the user
+                Console.WriteLine("Select a menu option:\n" +
+                    "1. Create New Project\n" +
+                    "2. View All Projects\n" +
+                    "3. View Project By Title\n" +
+                    "4. Update Existing Project\n" +
+                    "5. Delete Existing Project\n" +
+                    "6. Exit");
+
+                // Get the user's input
+                string input = Console.ReadLine();
+
+                //Evaluate the user's input and act accordingly
+                switch (input)
+                {
+                    case "1":
+                        //Create new Project
+                        //CreateNewProject();
+                        break;
+                    case "2":
+                        //View All Projects
+                        //DisplayAllProjects();
+                        break;
+                    case "3":
+                        //View Project By Title
+                       // DisplayProjectByTitle();
+                        break;
+                    case "4":
+                        //Update Existing Project
+                        //UpdateExistingProject();
+                        break;
+                    case "5":
+                        //Delete Existing Project
+                        //DeleteExistingProject();
+                        break;
+                    case "6":
+                        //Exit
+                        Console.WriteLine("Goodbye!");
+                        userMenuLoop = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter a valid number.");
+                        break;
+                }
+                Console.WriteLine("Please press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+    }
 
         private void ErrorsMenu()
         {
-            Console.WriteLine("You've reached the Projects menu");
-        }
+            bool userMenuLoop = true;
+            while (userMenuLoop)
+            {
+                Console.WriteLine("You've reached the Errors menu");
+
+                // Display our options to the user
+                Console.WriteLine("Select a menu option:\n" +
+                    "1. Create New Error\n" +
+                    "2. View All Errors\n" +
+                    "3. View Error By Title\n" +
+                    "4. Update Existing Error\n" +
+                    "5. Delete Existing Error\n" +
+                    "6. Exit");
+
+                // Get the user's input
+                string input = Console.ReadLine();
+
+                //Evaluate the user's input and act accordingly
+                switch (input)
+                {
+                    case "1":
+                        //Create new Error
+                        //CreateNewError();
+                        break;
+                    case "2":
+                        //View All Errors
+                        //DisplayAllErrors();
+                        break;
+                    case "3":
+                        //View Error By Title
+                        //DisplayErrorByTitle();
+                        break;
+                    case "4":
+                        //Update Existing Error
+                        //UpdateExistingError();
+                        break;
+                    case "5":
+                        //Delete Existing Error
+                        //DeleteExistingError();
+                        break;
+                    case "6":
+                        //Exit
+                        Console.WriteLine("Goodbye!");
+                        userMenuLoop = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter a valid number.");
+                        break;
+                }
+                Console.WriteLine("Please press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+}
 
         private void CommentsMenu()
         {
-            Console.WriteLine("You've reached the Projects menu");
+            bool userMenuLoop = true;
+            while (userMenuLoop) {
+                Console.WriteLine("You've reached the Comments Menu");
+
+                // Display our options to the user
+                Console.WriteLine("Select a menu option:\n" +
+                    "1. Create New Comment\n" +
+                    "2. View All Comments\n" +
+                    "3. View Comments By Title\n" +
+                    "4. Update Existing Comment\n" +
+                    "5. Delete Existing Comment\n" +
+                    "6. Exit");
+
+                // Get the user's input
+                string input = Console.ReadLine();
+
+                //Evaluate the user's input and act accordingly
+                switch (input)
+                {
+                    case "1":
+                        //Create new Comment
+                        //CreateNewComment();
+                        break;
+                    case "2":
+                        //View All Comments
+                        //DisplayAllComments();
+                        break;
+                    case "3":
+                        //View Comments By Title
+                        //DisplayCommentByTitle();
+                        break;
+                    case "4":
+                        //Update Existing Comment
+                        //UpdateExistingComment();
+                        break;
+                    case "5":
+                        //Delete Existing Comment
+                        //DeleteExistingComment();
+                        break;
+                    case "6":
+                        //Exit
+                        Console.WriteLine("Goodbye!");
+                        userMenuLoop= false;
+                        break;
+                    default:
+                        Console.WriteLine("Please enter a valid number.");
+                        break;
+                }
+                Console.WriteLine("Please press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
         }        
     }
 }
