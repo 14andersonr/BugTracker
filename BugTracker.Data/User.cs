@@ -27,6 +27,8 @@ namespace BugTracker.Data
             [Required]
             public string ConfirmPassword { get; set; }
 
+            public string grant_type { get; set; }
+
             public string Token { get; set; }
 
             public DateTimeOffset CreatedUtc { get; set; }

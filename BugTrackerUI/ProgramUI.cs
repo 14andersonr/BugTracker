@@ -315,7 +315,7 @@ namespace BugTrackerUI
             var requestToken = new RestRequest("Token", Method.POST);
             requestToken.AddParameter("username", "password");
             User newUser = new User();
-
+            newUser.grant_type = "password";
             //Email
             Console.WriteLine("Enter your email:");
             newUser.Email = Console.ReadLine();
@@ -333,10 +333,15 @@ namespace BugTrackerUI
             newUser.ConfirmPassword = Console.ReadLine();
 
             requestRegister.AddObject(newUser);
-            IRestResponse response = client.Execute(requestRegister);
-            var content = response.Content;
-            newUser.Token = content;
-            Console.WriteLine(content);
+            IRestResponse responseRegister = client.Execute(requestRegister);
+            var contentRegister = responseRegister.Content;
+            Console.WriteLine(contentRegister);
+            requestToken.AddObject(newUser);
+            IRestResponse responseToken = client.Execute(requestToken);
+            var contentToken = responseToken.Content;
+            Console.WriteLine($"Your Access Token is {contentToken}  ---------> Please save for future use.");
+            newUser.Token = contentToken;
+            Console.ReadLine();
             UserMenu();
         }
 
