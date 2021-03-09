@@ -22,14 +22,14 @@ namespace BugTracker.WebAPI.Controllers
         public IHttpActionResult Post(BuildErrorCreate buildError)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest($"Your ModelState is invalid and set to {ModelState}");
 
             var service = CreateBuildErrorService();
 
             if (!service.CreateBuildError(buildError))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("The build error has been posted.");
         }
 
         private BuildErrorService CreateBuildErrorService()
@@ -43,7 +43,7 @@ namespace BugTracker.WebAPI.Controllers
         {
             BuildErrorService buildErrorService = CreateBuildErrorService();
             var buildError = buildErrorService.GetBuildErrorById(id);
-            return Ok(buildError);
+            return Ok($"Here is the build error you requested: {buildError}");
         }
 
         public IHttpActionResult Put(BuildErrorEdit buildError)
@@ -56,7 +56,7 @@ namespace BugTracker.WebAPI.Controllers
             if (!service.UpdateBuildError(buildError))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("The build error has been updated!");
         }
 
         public IHttpActionResult Delete(int id)
@@ -66,7 +66,7 @@ namespace BugTracker.WebAPI.Controllers
             if (!service.DeleteBuildError(id))
                 return InternalServerError();
 
-            return Ok();
+            return Ok("You deleted the build error! Nice work!");
         }
     }
 }

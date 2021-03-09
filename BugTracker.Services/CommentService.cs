@@ -75,6 +75,7 @@ namespace BugTracker.Services
                         CommentId = entity.CommentId,
                         Text = entity.Text,
                         ErrorId = entity.ErrorId,
+                        Content = entity.Content,
                         CreatedUtc = entity.CreatedUtc
                     };
              }
@@ -88,9 +89,7 @@ namespace BugTracker.Services
                     ctx
                     .Comments
                     .Single(e => e.CommentId == model.CommentId && e.OwnerId == _userId);
-
                 entity.Content = model.content;                
-               
                 return ctx.SaveChanges() == 1;
    
             }
