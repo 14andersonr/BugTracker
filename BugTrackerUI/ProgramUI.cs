@@ -74,7 +74,7 @@ namespace BugTrackerUI
                     "  (2) Errors menu\n" +
                     "  (3) Comments menu\n" +
                     "  (4) Exit Program\n\n" +
-                    "     Enter number here --> ");
+                    "     Enter number here ---> ");
 
                 // Grab user input
                 string input = Console.ReadLine();
