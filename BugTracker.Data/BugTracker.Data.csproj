@@ -100,8 +100,10 @@
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="ProjectsJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunTimeError.cs" />
+    <Compile Include="Token.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
