@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BugTracker.Data;
+using RestSharp;
+using RestSharp.Authenticators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +14,53 @@ namespace BugTrackerUI
 
         public void RunApp()
         {           
-            UserMenu();
+            LoginMenu();
         }
 
+        public void LoginMenu()
+        {
+            bool userMenuLoop = true;
+            while (userMenuLoop)
+            {
+
+                Console.WriteLine("  ****** Bug Tracker ******\n\n");
+
+                Console.Write("  What would you like to do? Enter corresponding number:\n" +
+                    "  (1) Login\n" +
+                    "  (2) Register\n" +
+                    "  (3) I have a Token to enter!\n" +
+                    "  (4) Exit Program\n\n" +
+                    "     Enter number here --> ");
+
+                // Grab user input
+                string input = Console.ReadLine();
+
+                //Switch statement for user choice
+                switch (input)
+                {
+                    case "1":
+                        //Login();
+                        break;
+                    case "2":
+                        Register();
+                        break;
+                    case "3":
+                        //RegisterWithToken();
+                        break;
+                    case "4":
+                        Console.WriteLine("\n EXIT PROGRAM");
+                        userMenuLoop = false;
+                        break;
+                    default:
+                        Console.WriteLine("\n Please choose a valid number option (1 - 4)");
+                        break;
+                }
+                Console.WriteLine("\n Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+
+        }
         private void UserMenu()
         {
             bool userMenuLoop = true;
@@ -37,7 +84,6 @@ namespace BugTrackerUI
                 {
                     case "1":                          
                         ProjectsMenu();
-
                         break;
                     case "2":        
                         ErrorsMenu();
@@ -83,11 +129,11 @@ namespace BugTrackerUI
                 {
                     case "1":
                         //Create new Project
-                        //CreateNewProject();
+                        CreateNewProject();
                         break;
                     case "2":
                         //View All Projects
-                        //DisplayAllProjects();
+                        DisplayAllProjects();
                         break;
                     case "3":
                         //View Project By Title
@@ -227,6 +273,144 @@ namespace BugTrackerUI
                 Console.ReadKey();
                 Console.Clear();
             }
-        }        
+        }
+
+
+        public void Login()
+        {
+            Console.Clear();
+            var client = new RestClient();
+            client.BaseUrl = new Uri("https://localhost:44336/");
+            client.Authenticator = new HttpBasicAuthenticator("username", "password");
+
+            var request = new RestRequest("api/Account/Register", Method.POST);
+            request.AddParameter("username", "password");
+            User newUser = new User();
+
+            //Title
+            Console.WriteLine("Enter the title for the Project:");
+            newUser.Username = Console.ReadLine();
+
+            //Description
+            Console.WriteLine("Enter the description for the Project:");
+            newUser.Password = Console.ReadLine();
+
+            request.AddObject(newUser);
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
+            newUser.Token = content;
+            Console.WriteLine(content);
+            UserMenu();
+        }
+
+        public void Register()
+        {
+            Console.Clear();
+            var client = new RestClient();
+            client.BaseUrl = new Uri("https://localhost:44336/");
+            client.Authenticator = new HttpBasicAuthenticator("username", "password");
+
+            var requestRegister = new RestRequest("api/Account/Register", Method.POST);
+            requestRegister.AddParameter("username", "password");
+            var requestToken = new RestRequest("Token", Method.POST);
+            requestToken.AddParameter("username", "password");
+            User newUser = new User();
+            newUser.grant_type = "password";
+            //Email
+            Console.WriteLine("Enter your email:");
+            newUser.Email = Console.ReadLine();
+
+            //Username
+            Console.WriteLine("Enter your username:");
+            newUser.Username = Console.ReadLine();
+
+            //Password
+            Console.WriteLine("Enter your password:");
+            newUser.Password = Console.ReadLine();
+
+            //ConfirmPassword
+            Console.WriteLine("Confirm your password:");
+            newUser.ConfirmPassword = Console.ReadLine();
+
+            requestRegister.AddObject(newUser);
+            IRestResponse responseRegister = client.Execute(requestRegister);
+            var contentRegister = responseRegister.Content;
+            Console.WriteLine(contentRegister);
+            requestToken.AddObject(newUser);
+            IRestResponse responseToken = client.Execute(requestToken);
+            var contentToken = responseToken.Content;
+            Console.WriteLine($"Your Access Token is {contentToken}  ---------> Please save for future use.");
+            newUser.Token = contentToken;
+            Console.ReadLine();
+            UserMenu();
+        }
+
+        public void RegisterWithToken()
+        {
+            Console.Clear();
+            var client = new RestClient();
+            client.BaseUrl = new Uri("https://localhost:44336/");
+            client.Authenticator = new HttpBasicAuthenticator("username", "password");
+
+            var request = new RestRequest("api/Account/Register", Method.POST);
+            request.AddParameter("username", "password");
+            User newUser = new User();
+
+            //Title
+            Console.WriteLine("Enter the title for the Project:");
+            newUser.Username = Console.ReadLine();
+
+            //Description
+            Console.WriteLine("Enter the description for the Project:");
+            newUser.Password = Console.ReadLine();
+
+            request.AddObject(newUser);
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
+            newUser.Token = content;
+            Console.WriteLine(content);
+            UserMenu();
+        }
+
+
+        public void CreateNewProject() 
+        {
+            Console.Clear();
+            var client = new RestClient();
+            client.BaseUrl = new Uri("https://localhost:44336/");
+            client.Authenticator = new HttpBasicAuthenticator("username","password");
+
+            var request = new RestRequest("api/Project", Method.POST);
+            request.AddParameter("Title","Description");
+            Project newProject = new Project();
+
+            //Title
+            Console.WriteLine("Enter the title for the Project:");
+            newProject.Title = Console.ReadLine();
+
+            //Description
+            Console.WriteLine("Enter the description for the Project:");
+            newProject.Description = Console.ReadLine();
+
+            request.AddObject(newProject);
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
+            Console.WriteLine(content);
+        }
+
+        public void DisplayAllProjects()
+        {
+            Console.Clear();
+            var client = new RestClient();
+            client.BaseUrl = new Uri("https://localhost:44336/");
+            client.Authenticator = new HttpBasicAuthenticator("username", "password");
+
+            var request = new RestRequest("api/Project", Method.GET);
+            request.AddParameter("Title", "Description");
+
+            IRestResponse response = client.Execute(request);
+            var content = response.Content;
+            Console.WriteLine(content);
+        }
     }
 }
