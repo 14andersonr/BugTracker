@@ -1,4 +1,6 @@
 ﻿using BugTracker.Data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
@@ -11,6 +13,7 @@ namespace BugTrackerUI
 {
     class ProgramUI
     {
+        string userToken;
 
         public void RunApp()
         {           
@@ -22,7 +25,7 @@ namespace BugTrackerUI
             bool userMenuLoop = true;
             while (userMenuLoop)
             {
-
+                Console.Clear();
                 Console.WriteLine("  ****** Bug Tracker ******\n\n");
 
                 Console.Write("  What would you like to do? Enter corresponding number:\n" +
@@ -39,7 +42,7 @@ namespace BugTrackerUI
                 switch (input)
                 {
                     case "1":
-                        //Login();
+                        Login();
                         break;
                     case "2":
                         Register();
@@ -66,7 +69,7 @@ namespace BugTrackerUI
             bool userMenuLoop = true;
             while (userMenuLoop)
             {
-
+                Console.Clear();
                 Console.WriteLine("  ****** Bug Tracker ******\n\n");
 
                 Console.Write("  What would you like to do? Enter corresponding number:\n" +
@@ -110,6 +113,7 @@ namespace BugTrackerUI
             bool userMenuLoop = true;
             while (userMenuLoop)
             {
+                Console.Clear();
                 Console.WriteLine("You've reached the Projects menu");
 
                 // Display our options to the user
@@ -279,27 +283,35 @@ namespace BugTrackerUI
         public void Login()
         {
             Console.Clear();
-            var client = new RestClient();
-            client.BaseUrl = new Uri("https://localhost:44336/");
-            client.Authenticator = new HttpBasicAuthenticator("username", "password");
+            var client = new RestClient("https://localhost:44336/token");
+            //client.BaseUrl = new Uri("https://localhost:44336/");
+            //client.Authenticator = new HttpBasicAuthenticator("username", "password");
+            
 
-            var request = new RestRequest("api/Account/Register", Method.POST);
-            request.AddParameter("username", "password");
-            User newUser = new User();
+            User loginUser = new User();
 
-            //Title
-            Console.WriteLine("Enter the title for the Project:");
-            newUser.Username = Console.ReadLine();
+            Console.WriteLine("Enter your username:");
+            loginUser.Username = Console.ReadLine();
 
-            //Description
-            Console.WriteLine("Enter the description for the Project:");
-            newUser.Password = Console.ReadLine();
+            //Password
+            Console.WriteLine("Enter your password:");
+            loginUser.Password = Console.ReadLine();
 
-            request.AddObject(newUser);
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("grant_type", "password");
+            request.AddParameter("username", loginUser.Username);
+            request.AddParameter("password", loginUser.Password);
+
+            //request.AddObject(loginUser);
             IRestResponse response = client.Execute(request);
-            var content = response.Content;
-            newUser.Token = content;
-            Console.WriteLine(content);
+            //var content = response.Content;
+            //loginUser.Token = content;
+            //Console.WriteLine(content);
+
+            var token = JsonConvert.DeserializeObject<Token>(response.Content);
+            userToken = token.AccessToken;
+            
+            
             UserMenu();
         }
 
@@ -401,16 +413,35 @@ namespace BugTrackerUI
         public void DisplayAllProjects()
         {
             Console.Clear();
-            var client = new RestClient();
-            client.BaseUrl = new Uri("https://localhost:44336/");
-            client.Authenticator = new HttpBasicAuthenticator("username", "password");
+            //var client = new RestClient();
+            var client = new RestClient("https://localhost:44336/api/Project");
+            //client.BaseUrl = new Uri("https://localhost:44336/");
+            //client.Authenticator = new HttpBasicAuthenticator("username", "password");
 
-            var request = new RestRequest("api/Project", Method.GET);
-            request.AddParameter("Title", "Description");
+            //var request = new RestRequest("api/Project", Method.GET);
+            var request = new RestRequest(Method.GET);
+            request.AddParameter("Authorization", "Bearer " + userToken, ParameterType.HttpHeader);
+            request.AddHeader("Content-Type", "application/json");
 
             IRestResponse response = client.Execute(request);
-            var content = response.Content;
-            Console.WriteLine(content);
+            var projects = response.Content;
+
+            JArray a = JArray.Parse(projects);
+            Console.WriteLine(a.ToString());
+
+            //Console.WriteLine(projects);
+            //var projects = JsonConvert.DeserializeObject<ProjectsJson>(response.Content);
+            
+
+            /*List<ProjectsJson> projects = new List<ProjectsJson>();
+
+            foreach (ProjectsJson proj in projects)
+            {
+                Console.WriteLine(JsonConvert.DeserializeObject<ProjectsJson>(proj.content));
+            } */          
+            Console.ReadLine();
+            
+            
         }
     }
 }
