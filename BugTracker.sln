@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Services", "BugT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Models", "BugTracker.Models\BugTracker.Models.csproj", "{3CA813D8-375A-4A5E-9DA7-B66DD374BDCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTrackerUI", "BugTrackerUI\BugTrackerUI.csproj", "{08AD9445-5BDE-4C29-9B8A-5DB7BA516D01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3CA813D8-375A-4A5E-9DA7-B66DD374BDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CA813D8-375A-4A5E-9DA7-B66DD374BDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CA813D8-375A-4A5E-9DA7-B66DD374BDCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08AD9445-5BDE-4C29-9B8A-5DB7BA516D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08AD9445-5BDE-4C29-9B8A-5DB7BA516D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08AD9445-5BDE-4C29-9B8A-5DB7BA516D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08AD9445-5BDE-4C29-9B8A-5DB7BA516D01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

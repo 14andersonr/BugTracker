@@ -89,8 +89,7 @@ namespace BugTracker.Services
                     ctx
                     .Comments
                     .Single(e => e.CommentId == model.CommentId && e.OwnerId == _userId);
-
-                entity.Content = model.content;
+                entity.Content = model.content;                
                 return ctx.SaveChanges() == 1;
    
             }

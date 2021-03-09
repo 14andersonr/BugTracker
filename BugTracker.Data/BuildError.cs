@@ -10,9 +10,6 @@ namespace BugTracker.Data
     public class BuildError : Error
     {
         [Required]
-        public int LineNumber { get; set; }      
-
-        [Required]
         public string BuildErrorMessage { get; set; }          
     }
 }
