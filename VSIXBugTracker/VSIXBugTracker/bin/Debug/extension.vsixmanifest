@@ -1,6 +1,6 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
   <Metadata>
-    <Identity Id="VSIXBugTracker.97e45b58-960d-410f-8103-a371b2fe5cee" Version="1.0" Language="en-US" Publisher="Richard Anderson III" />
+    <Identity Id="VSIXBugTracker.03c99897-0051-4062-9c46-0e3e86404bbc" Version="1.0" Language="en-US" Publisher="Richard Anderson III" />
     <DisplayName>VSIXBugTracker</DisplayName>
     <Description>Empty VSIX Project.</Description>
   </Metadata>
