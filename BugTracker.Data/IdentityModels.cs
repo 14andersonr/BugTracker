@@ -37,6 +37,8 @@ namespace BugTracker.Data
         public DbSet<Error> Errors { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<BuildError> BuildErrors { get; set; }
+        public DbSet<RunTimeError> RunTimeErrors { get; set; }
+        public DbSet<GitFileError> GitFileErrors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
