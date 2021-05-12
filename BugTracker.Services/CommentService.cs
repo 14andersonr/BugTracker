@@ -17,23 +17,23 @@ namespace BugTracker.Services
             _userId = userId;
         }
 
-        public bool CreateComment(Comment model)
+        public bool CreateComment(Comment model)// we call CreateComment from a controller
         {
-            var entity =
-                new Comment()
+            var entity = // local variable 
+                new Comment() //eqialls to new Comment object.. where we save in the database (dbsetComments)
                 {
                     Text = model.Text,
-                    CommentId = model.CommentId,
+                    CommentId = model.CommentId, //thats given from postman
                     Content = model.Content,
                     OwnerId = _userId,
                     CreatedUtc = DateTimeOffset.Now,
-                    ErrorId = model.ErrorId
+                    ErrorId = model.ErrorId // that comes from Error wh
                 };
 
-            using (var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext()) // add it to the database 
             {
-                ctx.Comments.Add(entity);
-                return ctx.SaveChanges() == 1;
+                ctx.Comments.Add(entity); // then save it 
+                return ctx.SaveChanges() == 1; // the number of changes made in the database while it is saved
             }
         }
            

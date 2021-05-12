@@ -21,23 +21,33 @@ namespace BugTracker.WebAPI.Controllers
 
         }
 
-        public IHttpActionResult Post(Comment comment)
+        public IHttpActionResult Post(Comment comment)//it's public for access modifier. return type is IHttp..the name is a Post and a pramater it
+            //takes is Comment object called comment
+
         {
             if (!ModelState.IsValid)
                 return BadRequest($"Your ModelState is invalid and set to {ModelState}");
+            // does Comment meets the requrements that is in CommentCreate class
 
-            var service = CreateCommentService();
-            if (!service.CreateComment(comment))
+            var service = CreateCommentService(); // if it is valid it returns to this line. we call the method and set it equla to CommentService object
+            //(service) (what gets return by a method and that method return CommentService)
+           
+            if (!service.CreateComment(comment)) // we called a method that lives in CommentService that takes in Comment
+                //if we get false InternalServerlError
                 return InternalServerError();
+            
             return Ok("You posted a comment!");
-        }
+        }// if it creates and saves into the database we get ok
 
 
-        private CommentService CreateCommentService()
+        private CommentService CreateCommentService() // returns CommentService called CreateCommentService
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var commentService = new CommentService(userId);
-            return commentService;
+            var userId = Guid.Parse(User.Identity.GetUserId()); //local variable called userId. call the method user.Identity 
+            //Gets the current application user signed in  Parses it into to Guid then saves it as UserId
+            
+            var commentService = new CommentService(userId); // create instance of CommentService class. Because our CommentService requires a guid
+            // passed in. userId the time it is created  
+            return commentService; //then return that instance of commentService
         }
 
 
@@ -46,6 +56,7 @@ namespace BugTracker.WebAPI.Controllers
             CommentService commentService = CreateCommentService();
             var comment = commentService.GetCommentById(id);
             return Ok($"Here is the requested comment: {comment}");
+
         }
 
         public IHttpActionResult Put(CommentEdit comment)
